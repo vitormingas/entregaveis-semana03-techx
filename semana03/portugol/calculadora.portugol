@@ -1,0 +1,44 @@
+// Módulo Calculadora (versão em Portugol)
+programa
+{
+	// --- Função: soma dois números ---
+	funcao real soma(real a, real b)
+	{
+		retorne a + b
+	}
+
+	// --- Função: subtrai "b" de "a" ---
+	funcao real subtrai(real a, real b)
+	{
+		retorne a - b
+	}
+
+	// --- Função: multiplica dois números ---
+	funcao real multiplica(real a, real b)
+	{
+		retorne a * b
+	}
+
+	// --- Função: divide "a" por "b", tratando divisão por zero ---
+	// Em Portugol não existe o valor "None" do Python; por isso,
+	// usamos um valor sentinela (-9999) para indicar erro, além de
+	// exibir uma mensagem explicativa, sem interromper o programa.
+	funcao real divide(real a, real b)
+	{
+		se (b == 0) {
+			escreval("Erro: não é possível dividir por zero.")
+			retorne -9999
+		}
+		retorne a / b
+	}
+
+	funcao inicio()
+	{
+		escreval("Testando o modulo Calculadora:")
+		escreval("5 + 3 = ", soma(5, 3))
+		escreval("5 - 3 = ", subtrai(5, 3))
+		escreval("5 * 3 = ", multiplica(5, 3))
+		escreval("5 / 3 = ", divide(5, 3))
+		escreval("5 / 0 = ", divide(5, 0))
+	}
+}

@@ -1,0 +1,115 @@
+// Script Principal (versão em Portugol) - Sprint 3
+// Compatível com o Portugol Studio
+
+programa
+{
+	// ---------- Equivalente ao módulo calculadora ----------
+	funcao real soma(real a, real b)
+	{
+		retorne a + b
+	}
+
+	funcao real subtrai(real a, real b)
+	{
+		retorne a - b
+	}
+
+	funcao real multiplica(real a, real b)
+	{
+		retorne a * b
+	}
+
+	funcao real divide(real a, real b)
+	{
+		se (b == 0) {
+			escreval("Erro: não é possível dividir por zero.")
+			retorne -9999
+		}
+		retorne a / b
+	}
+
+	// ---------- Equivalente ao módulo utilidades ----------
+	funcao real converter_temperatura(real valor, cadeia escala_origem, cadeia escala_destino)
+	{
+		real valor_celsius
+
+		se (escala_origem == "C") {
+			valor_celsius <- valor
+		} senao {
+			valor_celsius <- (valor - 32) * 5 / 9
+		}
+
+		se (escala_destino == "F") {
+			retorne valor_celsius * 9 / 5 + 32
+		} senao {
+			retorne valor_celsius
+		}
+	}
+
+	funcao vazio ficha_aluno(cadeia nome, inteiro idade, cadeia curso)
+	{
+		escreval("===== Ficha do Aluno =====")
+		escreval("Nome: ", nome)
+		escreval("Idade: ", idade)
+		escreval("Curso: ", curso)
+	}
+
+	funcao real caixa(real precos[], inteiro quantidade_itens)
+	{
+		real total = 0
+		inteiro indice
+		para (indice = 0; indice < quantidade_itens; indice++) {
+			total <- total + precos[indice]
+		}
+		retorne total
+	}
+
+	funcao inicio()
+	{
+		real precos_compra[3]
+		cadeia lista_original[3]
+		cadeia lista_atualizada[4]
+		inteiro indice
+
+		escreval("===== Demonstração equivalente ao módulo calculadora =====")
+		escreval("Soma: ", soma(10, 5))
+		escreval("Subtração: ", subtrai(10, 5))
+		escreval("Multiplicação: ", multiplica(10, 5))
+		escreval("Divisão: ", divide(10, 5))
+		escreval("Divisão por zero: ", divide(10, 0))
+
+		escreval("")
+		escreval("===== Demonstração equivalente ao módulo utilidades =====")
+		escreval("100 C em Fahrenheit: ", converter_temperatura(100, "C", "F"))
+
+		precos_compra[0] <- 15.9
+		precos_compra[1] <- 8.5
+		precos_compra[2] <- 22.0
+		escreval("Total da compra: R$ ", caixa(precos_compra, 3))
+
+		ficha_aluno("João", 21, "Ciência da Computação")
+
+		escreval("")
+		escreval("===== Demonstração equivalente à lista segura =====")
+		lista_original[0] <- "item1"
+		lista_original[1] <- "item2"
+		lista_original[2] <- "item3"
+
+		para (indice = 0; indice < 3; indice++) {
+			lista_atualizada[indice] <- lista_original[indice]
+		}
+		lista_atualizada[3] <- "item4"
+
+		escreva("Lista original (inalterada): ")
+		para (indice = 0; indice < 3; indice++) {
+			escreva(lista_original[indice], " ")
+		}
+		escreval("")
+
+		escreva("Lista atualizada: ")
+		para (indice = 0; indice < 4; indice++) {
+			escreva(lista_atualizada[indice], " ")
+		}
+		escreval("")
+	}
+}

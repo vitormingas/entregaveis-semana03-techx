@@ -1,0 +1,36 @@
+// Módulo Lista Segura (versão em Portugol)
+// Compatível com o Portugol Studio
+
+programa
+{
+	funcao inicio()
+	{
+		cadeia lista_frutas[3]
+		cadeia nova_lista[4]
+		inteiro indice
+
+		lista_frutas[0] <- "maçã"
+		lista_frutas[1] <- "banana"
+		lista_frutas[2] <- "laranja"
+
+		// Cópia defensiva: copia cada item do vetor original para o novo vetor
+		para (indice = 0; indice < 3; indice++) {
+			nova_lista[indice] <- lista_frutas[indice]
+		}
+
+		// Adiciona o novo item apenas na cópia, sem alterar o vetor original
+		nova_lista[3] <- "uva"
+
+		escreva("Lista original: ")
+		para (indice = 0; indice < 3; indice++) {
+			escreva(lista_frutas[indice], " ")
+		}
+		escreval("")
+
+		escreva("Nova lista: ")
+		para (indice = 0; indice < 4; indice++) {
+			escreva(nova_lista[indice], " ")
+		}
+		escreval("")
+	}
+}

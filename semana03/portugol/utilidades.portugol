@@ -1,0 +1,103 @@
+// Módulo Utilidades (versão em Portugol)
+// Compatível com o Portugol Studio
+
+programa
+{
+	// --- Função: converte temperatura entre Celsius, Fahrenheit e Kelvin ---
+	funcao real converter_temperatura(real valor, cadeia escala_origem, cadeia escala_destino)
+	{
+		real valor_celsius
+
+		se (escala_origem == "C") {
+			valor_celsius <- valor
+		} senao se (escala_origem == "F") {
+			valor_celsius <- (valor - 32) * 5 / 9
+		} senao se (escala_origem == "K") {
+			valor_celsius <- valor - 273.15
+		} senao {
+			escreval("Erro: escala de origem inválida.")
+			retorne -9999
+		}
+
+		se (escala_destino == "C") {
+			retorne valor_celsius
+		} senao se (escala_destino == "F") {
+			retorne valor_celsius * 9 / 5 + 32
+		} senao se (escala_destino == "K") {
+			retorne valor_celsius + 273.15
+		} senao {
+			escreval("Erro: escala de destino inválida.")
+			retorne -9999
+		}
+	}
+
+	// --- Função: valida se uma senha atende aos critérios mínimos ---
+	// OBS: a indexação de caracteres de uma cadeia pode variar entre
+	// versões do Portugol Studio; ajuste conforme a versão utilizada.
+	funcao logico validar_senha(cadeia senha)
+	{
+		inteiro tamanho = comprimento(senha)
+		logico tem_maiuscula = falso
+		logico tem_minuscula = falso
+		logico tem_digito = falso
+		inteiro indice
+		caractere caractere_atual
+
+		para (indice = 0; indice < tamanho; indice++) {
+			caractere_atual <- senha[indice]
+
+			se (caractere_atual >= 'A' e caractere_atual <= 'Z') {
+				tem_maiuscula <- verdadeiro
+			}
+			se (caractere_atual >= 'a' e caractere_atual <= 'z') {
+				tem_minuscula <- verdadeiro
+			}
+			se (caractere_atual >= '0' e caractere_atual <= '9') {
+				tem_digito <- verdadeiro
+			}
+		}
+
+		retorne (tamanho >= 8) e tem_maiuscula e tem_minuscula e tem_digito
+	}
+
+	// --- Função: soma os preços de um vetor (equivalente ao *args) ---
+	funcao real caixa(real precos[], inteiro quantidade_itens)
+	{
+		real total = 0
+		inteiro indice
+
+		para (indice = 0; indice < quantidade_itens; indice++) {
+			total <- total + precos[indice]
+		}
+
+		retorne total
+	}
+
+	// --- Função: imprime a ficha do aluno (equivalente ao **kwargs) ---
+	funcao vazio ficha_aluno(cadeia nome, inteiro idade, cadeia curso)
+	{
+		escreval("===== Ficha do Aluno =====")
+		escreval("Nome: ", nome)
+		escreval("Idade: ", idade)
+		escreval("Curso: ", curso)
+	}
+
+	funcao inicio()
+	{
+		real lista_precos[3]
+
+		escreval("Testando o modulo Utilidades:")
+		escreval("25 C em Fahrenheit: ", converter_temperatura(25, "C", "F"))
+		escreval("98.6 F em Celsius: ", converter_temperatura(98.6, "F", "C"))
+
+		escreval("Senha 'abc123' e valida? ", validar_senha("abc123"))
+		escreval("Senha 'Abc12345' e valida? ", validar_senha("Abc12345"))
+
+		lista_precos[0] <- 10.5
+		lista_precos[1] <- 20
+		lista_precos[2] <- 5.25
+		escreval("Total do caixa: R$ ", caixa(lista_precos, 3))
+
+		ficha_aluno("Maria", 19, "Análise e Desenvolvimento de Sistemas")
+	}
+}

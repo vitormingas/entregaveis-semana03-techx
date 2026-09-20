@@ -1,0 +1,71 @@
+// bonus_extra (versão em Portugol) - Bônus
+
+programa
+{
+	// --- Função: média (representa o "módulo estatistica" importado) ---
+	funcao real media(real valores[], inteiro quantidade)
+	{
+		real soma_valores = 0
+		inteiro indice
+
+		para (indice = 0; indice < quantidade; indice++) {
+			soma_valores <- soma_valores + valores[indice]
+		}
+
+		retorne soma_valores / quantidade
+	}
+
+	// --- Função: fatorial recursivo ---
+	funcao inteiro fatorial(inteiro numero)
+	{
+		se (numero < 0) {
+			escreval("Erro: fatorial não é definido para números negativos.")
+			retorne -1
+		}
+		se (numero == 0 ou numero == 1) {
+			retorne 1
+		}
+		retorne numero * fatorial(numero - 1)
+	}
+
+	// --- Função: relatório (equivalente a *linhas e **config) ---
+	funcao vazio relatorio(cadeia titulo, cadeia linhas[], inteiro quantidade_linhas, cadeia separador, logico usar_maiusculas)
+	{
+		cadeia titulo_exibido
+		inteiro indice
+
+		se (usar_maiusculas) {
+			titulo_exibido <- maiusculo(titulo)
+		} senao {
+			titulo_exibido <- titulo
+		}
+
+		escreval(titulo_exibido)
+
+		para (indice = 0; indice < quantidade_linhas; indice++) {
+			escreval("- ", linhas[indice])
+		}
+	}
+
+	funcao inicio()
+	{
+		real valores_media[3]
+		cadeia linhas_relatorio[2]
+
+		escreval("===== Bônus: média (equivalente ao módulo estatistica) =====")
+		valores_media[0] <- 5
+		valores_media[1] <- 10
+		valores_media[2] <- 15
+		escreval("Média: ", media(valores_media, 3))
+
+		escreval("")
+		escreval("===== Bônus: fatorial recursivo =====")
+		escreval("Fatorial de 5: ", fatorial(5))
+
+		escreval("")
+		escreval("===== Bônus: relatório dinâmico =====")
+		linhas_relatorio[0] <- "Produto A: 10 unidades"
+		linhas_relatorio[1] <- "Produto B: 5 unidades"
+		relatorio("Relatório de Vendas", linhas_relatorio, 2, "=", verdadeiro)
+	}
+}

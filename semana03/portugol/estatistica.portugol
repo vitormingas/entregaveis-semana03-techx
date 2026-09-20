@@ -1,0 +1,69 @@
+// Módulo Estatística (versão em Portugol) - Bônus
+
+programa
+{
+	// --- Função: média ---
+	funcao real media(real valores[], inteiro quantidade)
+	{
+		real soma_valores = 0
+		inteiro indice
+
+		para (indice = 0; indice < quantidade; indice++) {
+			soma_valores <- soma_valores + valores[indice]
+		}
+
+		retorne soma_valores / quantidade
+	}
+
+	// --- Função: mediana (assume que o vetor já está ordenado) ---
+	funcao real mediana(real valores_ordenados[], inteiro quantidade)
+	{
+		inteiro meio = quantidade / 2
+
+		se (quantidade % 2 == 0) {
+			retorne (valores_ordenados[meio - 1] + valores_ordenados[meio]) / 2
+		} senao {
+			retorne valores_ordenados[meio]
+		}
+	}
+
+	// --- Função: moda (valor que mais se repete) ---
+	funcao real moda(real valores[], inteiro quantidade)
+	{
+		inteiro indice_externo
+		inteiro indice_interno
+		inteiro contagem_atual
+		inteiro maior_contagem = 0
+		real valor_moda = valores[0]
+
+		para (indice_externo = 0; indice_externo < quantidade; indice_externo++) {
+			contagem_atual <- 0
+			para (indice_interno = 0; indice_interno < quantidade; indice_interno++) {
+				se (valores[indice_interno] == valores[indice_externo]) {
+					contagem_atual <- contagem_atual + 1
+				}
+			}
+			se (contagem_atual > maior_contagem) {
+				maior_contagem <- contagem_atual
+				valor_moda <- valores[indice_externo]
+			}
+		}
+
+		retorne valor_moda
+	}
+
+	funcao inicio()
+	{
+		real valores[4]
+
+		valores[0] <- 2
+		valores[1] <- 4
+		valores[2] <- 4
+		valores[3] <- 6
+
+		escreval("Testando o modulo Estatistica:")
+		escreval("Média: ", media(valores, 4))
+		escreval("Mediana: ", mediana(valores, 4))
+		escreval("Moda: ", moda(valores, 4))
+	}
+}
